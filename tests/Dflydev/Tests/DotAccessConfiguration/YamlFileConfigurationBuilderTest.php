@@ -15,6 +15,13 @@ use Dflydev\DotAccessConfiguration\YamlFileConfigurationBuilder;
 
 class YamlFileConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        if (!class_exists('Symfony\Component\Yaml\Yaml')) {
+            $this->markTestSkipped('The Symfony2 YAML library is not available');
+        }
+    }
+
     public function testBuilder()
     {
         $configurationBuilder = new YamlFileConfigurationBuilder(array(__DIR__.'/fixtures/yamlFileConfigurationBuilderTest-testBuilder.yml'));

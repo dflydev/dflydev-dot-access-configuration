@@ -1,0 +1,41 @@
+{
+    "name": "dflydev/dot-access-configuration",
+    "type": "library",
+    "description": "Given a deep data structure representing a configuration, access configuration by dot notation.",
+    "homepage": "https://github.com/dflydev/dot-access-configuration",
+    "keywords": ["dot", "access", "data", "config", "configuration", "notation", "config", "yaml", "yml"],
+    "license": "New BSD License",
+    "authors": [
+        {
+            "name": "Dragonfly Development Inc.",
+            "email": "info@dflydev.com",
+            "homepage": "http://dflydev.com"
+        },
+        {
+            "name": "Beau Simensen",
+            "email": "beau@dflydev.com",
+            "homepage": "http://beausimensen.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "dflydev/dot-access-data": "1.*",
+        "dflydev/placeholder-resolver": "1.*"
+    },
+    "require-dev": {
+        "symfony/yaml": ">2.0.0,<2.2"
+    },
+    "suggests": {
+        "symfony/yaml": "Required for using the YAML Configuration Builders"
+    },
+    "autoload": {
+        "psr-0": {
+            "Dflydev\\DotAccessConfiguration": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

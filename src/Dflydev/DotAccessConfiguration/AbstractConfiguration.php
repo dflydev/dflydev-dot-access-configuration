@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/dot-access-configuration.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -12,7 +12,6 @@
 namespace Dflydev\DotAccessConfiguration;
 
 use Dflydev\DotAccessData\Data;
-use Dflydev\DotAccessData\Util as DotAccessDataUtil;
 use Dflydev\PlaceholderResolver\PlaceholderResolverInterface;
 use Dflydev\PlaceholderResolver\RegexPlaceholderResolver;
 
@@ -67,7 +66,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 
     /**
      * {@inheritdocs}
-     */    
+     */
     public function exportRaw()
     {
         return $this->data()->export();
@@ -75,7 +74,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 
     /**
      * {@inheritdocs}
-     */    
+     */
     public function export()
     {
         if ($this->exportIsDirty) {
@@ -97,7 +96,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 
     /**
      * {@inheritdocs}
-     */    
+     */
     public function importRaw($imported = null, $clobber = true)
     {
         $this->exportIsDirty = true;
@@ -109,7 +108,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 
     /**
      * {@inheritdocs}
-     */    
+     */
     public function import(ConfigurationInterface $imported, $clobber = true)
     {
         return $this->importRaw($imported->exportRaw(), $clobber);
@@ -139,10 +138,10 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 
     /**
      * Resolve values
-     * 
+     *
      * For objects, do nothing. For strings, resolve placeholder.
      * For arrays, call resolveValues() on each item.
-     * 
+     *
      * @param mixed $input
      */
     protected function resolveValues(&$input = null)
@@ -161,7 +160,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 
     /**
      * Data
-     * 
+     *
      * @return Data
      */
     protected function data()
@@ -175,7 +174,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 
     /**
      * Placeholder Resolver
-     * 
+     *
      * @return PlaceholderResolverInterface
      */
     protected function placeholderResolver()

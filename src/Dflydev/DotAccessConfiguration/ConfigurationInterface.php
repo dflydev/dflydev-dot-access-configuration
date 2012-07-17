@@ -20,6 +20,7 @@ interface ConfigurationInterface
      * Get a value (with placeholders unresolved)
      * 
      * @param string $key
+     * 
      * @return mixed
      */
     public function getRaw($key);
@@ -28,6 +29,7 @@ interface ConfigurationInterface
      * Get a value (with placeholders resolved)
      * 
      * @param string $key
+     * 
      * @return mixed
      */
     public function get($key);
@@ -93,6 +95,7 @@ interface ConfigurationInterface
      * Resolve placeholders in value from configuration
      * 
      * @param string|null $value
+     * 
      * @return string
      */
     public function resolve($value = null);
@@ -101,6 +104,7 @@ interface ConfigurationInterface
      * Set Placeholder Resolver
      * 
      * @param PlaceholderResolver $placeholderResolver
+     * 
      * @return ConfigurationInterface
      */
     public function setPlaceholderResolver(PlaceholderResolverInterface $placeholderResolver);

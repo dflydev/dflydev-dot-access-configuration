@@ -19,6 +19,7 @@ interface PlaceholderResolverFactoryInterface
      * Configuration
      * 
      * @param ConfigurationInterface $configuration
+     * 
      * @return PlaceholderResolverInterface
      */
     public function create(ConfigurationInterface $configuration);

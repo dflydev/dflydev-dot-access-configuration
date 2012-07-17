@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/dot-access-configuration.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -17,14 +17,14 @@ class YamlConfigurationBuilder extends AbstractConfigurationBuilder
 {
     /**
      * YAML input string
-     * 
+     *
      * @var string
      */
     protected $input;
 
     /**
      * Constructor
-     * 
+     *
      * @param string|null $input
      */
     public function __construct($input = null)

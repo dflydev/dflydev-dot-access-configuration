@@ -55,6 +55,7 @@ class ConfigurationDataSource implements DataSourceInterface
      * Set Configuration
      * 
      * @param ConfigurationInterface $configuration
+     * 
      * @return ConfigurationDataSource
      */
     public function setConfiguration(ConfigurationInterface $configuration)

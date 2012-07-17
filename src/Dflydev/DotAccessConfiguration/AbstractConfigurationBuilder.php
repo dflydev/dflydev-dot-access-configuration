@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/dot-access-configuration.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -18,8 +18,9 @@ abstract class AbstractConfigurationBuilder implements ConfigurationBuilderInter
 
     /**
      * Set Configuration Factory
-     * 
+     *
      * @param ConfigurationFactoryInterface $configurationFactory
+     *
      * @return AbstractConfigurationBuilder
      */
     public function setConfigurationFactory(ConfigurationFactoryInterface $configurationFactory)
@@ -31,7 +32,7 @@ abstract class AbstractConfigurationBuilder implements ConfigurationBuilderInter
 
     /**
      * Configuration Factory
-     * 
+     *
      * @return ConfigurationFactoryInterface
      */
     protected function configurationFactory()
@@ -62,7 +63,7 @@ abstract class AbstractConfigurationBuilder implements ConfigurationBuilderInter
 
     /**
      * Set Placeholder Resolver Factory
-     * 
+     *
      * @param PlaceholderResolverFactoryInterface $placeholderResolverFactory
      */
     public function setPlaceholderResolverFactory(PlaceholderResolverFactoryInterface $placeholderResolverFactory)
@@ -72,7 +73,7 @@ abstract class AbstractConfigurationBuilder implements ConfigurationBuilderInter
 
     /**
      * Called to reconfigure the specified Configuration Builder to be similar to this instance
-     * 
+     *
      * @param AbstractConfigurationBuilder $configurationBuilder
      */
     public function reconfigure(AbstractConfigurationBuilder $configurationBuilder)
@@ -86,7 +87,7 @@ abstract class AbstractConfigurationBuilder implements ConfigurationBuilderInter
 
     /**
      * Internal build
-     * 
+     *
      * @param ConfigurationInterface $configuration
      */
     abstract protected function internalBuild(ConfigurationInterface $configuration);

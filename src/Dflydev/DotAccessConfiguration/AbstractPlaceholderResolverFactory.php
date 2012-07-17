@@ -28,6 +28,7 @@ abstract class AbstractPlaceholderResolverFactory implements PlaceholderResolver
      * 
      * @param ConfigurationInterface $configuration
      * @param DataSourceInterface $dataSource
+     * 
      * @return PlaceholderResolverInterface
      */
     abstract protected function createInternal(ConfigurationInterface $configuration, DataSourceInterface $dataSource);

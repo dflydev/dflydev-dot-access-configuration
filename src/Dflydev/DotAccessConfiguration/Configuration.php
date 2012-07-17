@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/dot-access-configuration.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,9 +15,9 @@ class Configuration extends AbstractConfiguration
 {
     /**
      * Constructor
-     * 
+     *
      * @param array|null $config
-     */    
+     */
     public function __construct(array $config = null)
     {
         $this->importRaw($config);

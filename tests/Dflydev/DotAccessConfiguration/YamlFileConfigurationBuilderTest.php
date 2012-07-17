@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Dflydev\Tests\DotAccessConfiguration;
-
-use Dflydev\DotAccessConfiguration\YamlFileConfigurationBuilder;
+namespace Dflydev\DotAccessConfiguration;
 
 class YamlFileConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
 {

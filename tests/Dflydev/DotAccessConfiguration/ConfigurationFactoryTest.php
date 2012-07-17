@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Dflydev\Tests\DotAccessConfiguration;
-
-use Dflydev\DotAccessConfiguration\ConfigurationFactory;
+namespace Dflydev\DotAccessConfiguration;
 
 class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
 {

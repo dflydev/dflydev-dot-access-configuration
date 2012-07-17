@@ -4,7 +4,7 @@
     "description": "Given a deep data structure representing a configuration, access configuration by dot notation.",
     "homepage": "https://github.com/dflydev/dflydev-dot-access-configuration",
     "keywords": ["config", "configuration"],
-    "license": "New BSD License",
+    "license": "MIT",
     "authors": [
         {
             "name": "Dragonfly Development Inc.",

@@ -11,6 +11,7 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
+use Psr\Log\InvalidArgumentException;
 use Symfony\Component\Yaml\Yaml;
 
 class YamlConfigurationBuilder extends AbstractConfigurationBuilder
@@ -38,7 +39,16 @@ class YamlConfigurationBuilder extends AbstractConfigurationBuilder
     public function internalBuild(ConfigurationInterface $configuration)
     {
         if (null !== $this->input) {
-            $configuration->importRaw(Yaml::parse($this->input));
+            try{
+                $yml = Yaml::parse($this->input, true);
+            } catch (\Exception $e) {
+                throw new InvalidArgumentException($e->getMessage(), 0, $e);
+            }
+            if (is_string($yml))
+            {
+                throw(new \InvalidArgumentException('Yaml could not be parsed, parser detected a string.'));
+            }
+            $configuration->importRaw($yml);
         }
     }
 }

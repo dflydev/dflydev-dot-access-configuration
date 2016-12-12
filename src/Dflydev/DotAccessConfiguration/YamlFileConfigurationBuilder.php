@@ -42,7 +42,7 @@ class YamlFileConfigurationBuilder extends AbstractConfigurationBuilder
         $imports = array();
         foreach ($this->yamlConfigurationFilenames as $yamlConfigurationFilename) {
             if (file_exists($yamlConfigurationFilename)) {
-                $config = DotAccessDataUtil::mergeAssocArray($config, Yaml::parse($yamlConfigurationFilename));
+                $config = DotAccessDataUtil::mergeAssocArray($config, Yaml::parse(file_get_contents($yamlConfigurationFilename)));
                 if (isset($config['imports'])) {
                     foreach ((array) $config['imports'] as $file) {
                         if (0 === strpos($file, '/')) {

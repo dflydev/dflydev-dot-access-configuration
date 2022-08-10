@@ -11,61 +11,72 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+use Dflydev\DotAccessData\Exception\MissingPathException;
+use PHPUnit\Framework\TestCase;
+
+class ConfigurationTest extends TestCase
 {
-    protected function getTestData()
-    {
-        return array(
-            'a' => array(
-                'b' => array(
-                    'c' => 'ABC',
-                ),
-            ),
-            'abc' => '%a.b.c%',
-            'abcd' => '%a.b.c.d%',
-            'some' => array(
-                'object' => new ConfigurationTestObject('some.object'),
-                'other' => array(
-                    'object' => new ConfigurationTestObject('some.other.object'),
-                ),
-            ),
-            'object' => new ConfigurationTestObject('object'),
-            'an_array' => array('hello'),
-        );
-    }
-
-    protected function runBasicTests($configuration)
-    {
-        $this->assertEquals('ABC', $configuration->get('a.b.c'), 'Direct access by dot notation');
-        $this->assertEquals('ABC', $configuration->get('abc'), 'Resolved access');
-        $this->assertEquals('%a.b.c.d%', $configuration->get('abcd'), 'Unresolved access');
-        $this->assertEquals('object', $configuration->get('object')->key);
-        $this->assertEquals('some.object', $configuration->get('some.object')->key);
-        $this->assertEquals('some.other.object', $configuration->get('some.other.object')->key);
-        $this->assertEquals(array('hello'), $configuration->get('an_array'));
-        $this->assertEquals('This is ABC', $configuration->resolve('This is %a.b.c%'));
-        $this->assertNull($configuration->resolve());
-    }
-
-    public function testGet()
+    public function testGet(): void
     {
         $configuration = new Configuration($this->getTestData());
 
         $this->runBasicTests($configuration);
     }
 
-    public function testAppend()
+    protected function getTestData(): array
+    {
+        return [
+            'a' => [
+                'b' => [
+                    'c' => 'ABC',
+                ],
+            ],
+            'abc' => '%a.b.c%',
+            'some' => [
+                'object' => new ConfigurationTestObject('some.object'),
+                'other' => [
+                    'object' => new ConfigurationTestObject('some.other.object'),
+                ],
+            ],
+            'object' => new ConfigurationTestObject('object'),
+            'an_array' => ['hello'],
+        ];
+    }
+
+    protected function runBasicTests(AbstractConfiguration $configuration): void
+    {
+        $this->assertEquals('ABC', $configuration->get('a.b.c'), 'Direct access by dot notation');
+        $this->assertEquals('ABC', $configuration->get('abc'), 'Resolved access');
+        $this->assertEquals('object', $configuration->get('object')->key);
+        $this->assertEquals('some.object', $configuration->get('some.object')->key);
+        $this->assertEquals('some.other.object', $configuration->get('some.other.object')->key);
+        $this->assertEquals(['hello'], $configuration->get('an_array'));
+        $this->assertEquals('This is ABC', $configuration->resolve('This is %a.b.c%'));
+        $this->assertNull($configuration->resolve());
+    }
+
+    public function testUnresolvedAccess(): void
+    {
+        $configuration = new Configuration($this->getTestData());
+
+        $configuration->append('abcd', '%a.b.c.d%');
+
+        $this->expectException(MissingPathException::class);
+        $this->assertEquals('%a.b.c.d%', $configuration->get('abcd'), 'Unresolved access');
+    }
+
+    public function testAppend(): void
     {
         $configuration = new Configuration($this->getTestData());
 
         $configuration->append('a.b.c', 'abc');
         $configuration->append('an_array', 'world');
 
-        $this->assertEquals(array('ABC', 'abc'), $configuration->get('a.b.c'));
-        $this->assertEquals(array('hello', 'world'), $configuration->get('an_array'));
+        $this->assertEquals(['ABC', 'abc'], $configuration->get('a.b.c'));
+        $this->assertEquals(['hello', 'world'], $configuration->get('an_array'));
     }
 
-    public function testExportRaw()
+    public function testExportRaw(): void
     {
         $configuration = new Configuration($this->getTestData());
 
@@ -85,7 +96,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $configuration->exportRaw());
     }
 
-    public function testExport()
+    public function testExport(): void
     {
         $configuration = new Configuration($this->getTestData());
 
@@ -117,7 +128,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $configuration->export());
     }
 
-    public function testExportData()
+    public function testExportData(): void
     {
         $configuration = new Configuration($this->getTestData());
 
@@ -128,7 +139,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ABC', $data->get('abc'));
     }
 
-    public function testImportRaw()
+    public function testImportRaw(): void
     {
         $configuration = new Configuration();
 
@@ -137,7 +148,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->runBasicTests($configuration);
     }
 
-    public function testImport()
+    public function testImport(): void
     {
         $configuration = new Configuration();
 
@@ -146,18 +157,17 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->runBasicTests($configuration);
     }
 
-    public function testSetPlaceholderResolver()
+    public function testSetPlaceholderResolver(): void
     {
-        $placeholderResolver = $this->getMock('Dflydev\PlaceholderResolver\PlaceholderResolverInterface');
+        $placeholderResolver = $this->createMock('Dflydev\PlaceholderResolver\PlaceholderResolverInterface');
 
         $placeholderResolver
             ->expects($this->once())
             ->method('resolvePlaceholder')
             ->with($this->equalTo('foo'))
-            ->will($this->returnValue('bar'))
-        ;
+            ->willReturn('bar');
 
-        $configuration = new Configuration;
+        $configuration = new Configuration();
 
         $configuration->setPlaceholderResolver($placeholderResolver);
 
@@ -168,6 +178,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 class ConfigurationTestObject
 {
     public $key;
+
     public function __construct($key)
     {
         $this->key = $key;

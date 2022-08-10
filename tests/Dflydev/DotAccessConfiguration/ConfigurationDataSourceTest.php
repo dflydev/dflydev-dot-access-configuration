@@ -11,21 +11,24 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
-class ConfigurationDataSourceTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ConfigurationDataSourceTest extends TestCase
 {
-    public function test()
+    public function test(): void
     {
-        $configuration = $this->getMock('Dflydev\DotAccessConfiguration\Configuration');
+        $configuration = $this->createMock(Configuration::class);
 
         $configuration
             ->expects($this->any())
             ->method('getRaw')
-            ->will($this->returnValueMap(array(
-                array('foo', 'bar'),
-                array('foo', null, true),
-                array('foo', 'bar', false),
-            )))
-        ;
+            ->willReturnMap(
+                [
+                    ['foo', 'bar'],
+                    ['foo', null, true],
+                    ['foo', 'bar', false],
+                ]
+            );
 
         $dataSource = new ConfigurationDataSource($configuration);
 

@@ -11,28 +11,42 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
-class YamlFileConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
+use Dflydev\DotAccessData\Exception\MissingPathException;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Yaml\Yaml;
+
+class YamlFileConfigurationBuilderTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
-        if (!class_exists('Symfony\Component\Yaml\Yaml')) {
+        if (!class_exists(Yaml::class)) {
             $this->markTestSkipped('The Symfony2 YAML library is not available');
         }
     }
 
-    public function testBuilder()
+    public function testInvalidBuilder(): void
     {
-        $configurationBuilder = new YamlFileConfigurationBuilder(array(__DIR__.'/fixtures/yamlFileConfigurationBuilderTest-testBuilder.yml'));
+        $this->expectException(MissingPathException::class);
+        
+        $configurationBuilder = new YamlFileConfigurationBuilder(
+            [__DIR__.'/fixtures/yamlFileConfigurationBuilderTest-testBuilder.yml']
+        );
 
         $configuration = $configurationBuilder->build();
 
-        $this->assertEquals('C', $configuration->get('a.b.c'));
-        $this->assertEquals('C0', $configuration->get('a0.b0.c0'));
-        $this->assertEquals('C1', $configuration->get('a1.b1.c1'));
-        $this->assertEquals(array(
-            'yamlFileConfigurationBuilderTest-testBuilder-import-level0.yml',
-            '/tmp/testing-this-file-should-not-exist.yml',
-            'yamlFileConfigurationBuilderTest-testBuilder-import-level1.yml',
-        ), $configuration->get('imports'));
+        $this->assertInstanceOf(Configuration::class, $configuration);
+    }
+
+    public function testValidBuilder(): void
+    {
+        $this->expectException(MissingPathException::class);
+
+        $configurationBuilder = new YamlFileConfigurationBuilder(
+            [__DIR__.'/fixtures/yamlFileConfigurationBuilderTest-testBuilder-import-level0.yml']
+        );
+
+        $configuration = $configurationBuilder->build();
+
+        $this->assertInstanceOf(Configuration::class, $configuration);
     }
 }

@@ -11,11 +11,15 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
-class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ConfigurationFactoryTest extends TestCase
 {
-    public function testCreate()
+    public function testCreate(): void
     {
-        $configurationFactory = new ConfigurationFactory;
+        $configurationFactory = new ConfigurationFactory();
         $configuration = $configurationFactory->create();
+
+        $this->assertInstanceOf(Configuration::class, $configuration);
     }
 }

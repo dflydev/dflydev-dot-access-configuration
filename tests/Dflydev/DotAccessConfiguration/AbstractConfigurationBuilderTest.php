@@ -11,71 +11,70 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
-class AbstractConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
-{
-    public function testPlaceholderResolver()
-    {
-        $placeholderResolver = $this->getMock('Dflydev\PlaceholderResolver\PlaceholderResolverInterface');
+use Dflydev\PlaceholderResolver\PlaceholderResolverInterface;
+use PHPUnit\Framework\TestCase;
 
-        $placeholderResolverFactory = $this->getMock('Dflydev\DotAccessConfiguration\PlaceholderResolverFactoryInterface');
+class AbstractConfigurationBuilderTest extends TestCase
+{
+    public function testPlaceholderResolver(): void
+    {
+        $placeholderResolver = $this->createMock(PlaceholderResolverInterface::class);
+
+        $placeholderResolverFactory = $this->createMock(
+            PlaceholderResolverFactoryInterface::class
+        );
         $placeholderResolverFactory
             ->expects($this->once())
             ->method('create')
-            ->will($this->returnValue($placeholderResolver))
-        ;
+            ->willReturn($placeholderResolver);
 
-        $configurationBuilder = $this->getMockForAbstractClass('Dflydev\DotAccessConfiguration\AbstractConfigurationBuilder');
+        $configurationBuilder = $this->getMockForAbstractClass(AbstractConfigurationBuilder::class);
         $configurationBuilder
             ->expects($this->once())
-            ->method('internalBuild')
-        ;
+            ->method('internalBuild');
 
         $configurationBuilder->setPlaceholderResolverFactory($placeholderResolverFactory);
         $configurationBuilder->build();
     }
 
-    public function testReconfigure()
+    public function testReconfigure(): void
     {
-        $configuration000 = $this->getMock('Dflydev\DotAccessConfiguration\ConfigurationInterface');
+        $configuration000 = $this->createMock(ConfigurationInterface::class);
 
         $configuration000
             ->expects($this->exactly(2))
             ->method('get')
             ->with($this->equalTo('foo'))
-            ->will($this->returnValue('FOO'))
-        ;
+            ->willReturn('FOO');
 
-        $configuration001 = $this->getMock('Dflydev\DotAccessConfiguration\ConfigurationInterface');
+        $configuration001 = $this->createMock(ConfigurationInterface::class);
 
         $configuration001
             ->expects($this->exactly(2))
             ->method('get')
             ->with($this->equalTo('bar'))
-            ->will($this->returnValue('BAR'))
-        ;
+            ->willReturn('BAR');
 
-        $placeholderResolver = $this->getMock('Dflydev\PlaceholderResolver\PlaceholderResolverInterface');
+        $placeholderResolver = $this->createMock(PlaceholderResolverInterface::class);
 
-        $placeholderResolverFactory = $this->getMock('Dflydev\DotAccessConfiguration\PlaceholderResolverFactoryInterface');
+        $placeholderResolverFactory = $this->createMock(PlaceholderResolverFactoryInterface::class);
         $placeholderResolverFactory
             ->expects($this->exactly(2))
             ->method('create')
-            ->will($this->returnValue($placeholderResolver))
-        ;
+            ->willReturn($placeholderResolver);
 
-        $configurationFactory = $this->getMock('Dflydev\DotAccessConfiguration\ConfigurationFactoryInterface');
+        $configurationFactory = $this->createMock(ConfigurationFactoryInterface::class);
         $configurationFactory
             ->expects($this->exactly(2))
             ->method('create')
-            ->will($this->onConsecutiveCalls($configuration000, $configuration001));
-        ;
+            ->will($this->onConsecutiveCalls($configuration000, $configuration001));;
 
-        $configurationBuilder = $this->getMockForAbstractClass('Dflydev\DotAccessConfiguration\AbstractConfigurationBuilder');
+        $configurationBuilder = $this->getMockForAbstractClass(AbstractConfigurationBuilder::class);
 
         $configurationBuilder->setPlaceholderResolverFactory($placeholderResolverFactory);
         $configurationBuilder->setConfigurationFactory($configurationFactory);
 
-        $reconfiguredConfigurationBuilder = $this->getMockForAbstractClass('Dflydev\DotAccessConfiguration\AbstractConfigurationBuilder');
+        $reconfiguredConfigurationBuilder = $this->getMockForAbstractClass(AbstractConfigurationBuilder::class);
         $configurationBuilder->reconfigure($reconfiguredConfigurationBuilder);
 
         $configurationTest000 = $configurationBuilder->build();

@@ -12,6 +12,7 @@
 namespace Dflydev\DotAccessConfiguration;
 
 use Dflydev\DotAccessData\Util as DotAccessDataUtil;
+use Exception;
 use Symfony\Component\Yaml\Yaml;
 
 class YamlFileConfigurationBuilder extends AbstractConfigurationBuilder
@@ -58,6 +59,7 @@ class YamlFileConfigurationBuilder extends AbstractConfigurationBuilder
             }
         }
 
+        $internalImports = null;
         if ($imports) {
             $importsBuilder = new static($imports);
 
@@ -68,8 +70,6 @@ class YamlFileConfigurationBuilder extends AbstractConfigurationBuilder
             $configuration->import($importsBuilder->build());
 
             $internalImports = $configuration->get('imports');
-        } else {
-            $internalImports = null;
         }
 
         $configuration->importRaw($config);

@@ -40,7 +40,7 @@ class YamlConfigurationBuilder extends AbstractConfigurationBuilder
     {
         if (null !== $this->input) {
             try{
-                $yml = Yaml::parse($this->input, Yaml::PARSE_EXCEPTION_ON_INVALID_TYPE);
+                $yml = Yaml::parse($this->input, true);
             } catch (\Exception $e) {
                 throw new InvalidArgumentException($e->getMessage(), 0, $e);
             }

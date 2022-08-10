@@ -1,7 +1,7 @@
 imports:
-    - yamlFileConfigurationBuilderTest-testBuilder-import-level0.yml
-    - /tmp/testing-this-file-should-not-exist.yml
+  - yamlFileConfigurationBuilderTest-testBuilder-import-level0.yml
+  - /tmp/testing-this-file-should-not-exist.yml
 
 a:
-    b:
-        c: C
+  b:
+    c: C

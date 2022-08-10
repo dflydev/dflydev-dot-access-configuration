@@ -11,12 +11,17 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
-class PlaceholderResolverFactoryTest extends \PHPUnit_Framework_TestCase
+use Dflydev\PlaceholderResolver\RegexPlaceholderResolver;
+use PHPUnit\Framework\TestCase;
+
+class PlaceholderResolverFactoryTest extends TestCase
 {
-    public function testCreate()
+    public function testCreate(): void
     {
-        $configuration = $this->getMock('Dflydev\DotAccessConfiguration\Configuration');
-        $placeholderResolverFactory = new PlaceholderResolverFactory;
+        $configuration = $this->createMock(Configuration::class);
+        $placeholderResolverFactory = new PlaceholderResolverFactory();
         $placeholderResolver = $placeholderResolverFactory->create($configuration);
+
+        $this->assertInstanceOf(RegexPlaceholderResolver::class, $placeholderResolver);
     }
 }

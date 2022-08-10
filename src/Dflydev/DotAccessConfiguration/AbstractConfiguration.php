@@ -151,10 +151,8 @@ abstract class AbstractConfiguration implements ConfigurationInterface
                 $this->resolveValues($value);
                 $input[$idx] = $value;
             }
-        } else {
-            if (!is_object($input)) {
-                $input = $this->placeholderResolver()->resolvePlaceholder($input);
-            }
+        } elseif (!is_object($input)) {
+            $input = $this->placeholderResolver()->resolvePlaceholder($input);
         }
     }
 

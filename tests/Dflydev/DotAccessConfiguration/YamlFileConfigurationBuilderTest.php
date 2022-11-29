@@ -11,17 +11,17 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
-class YamlFileConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class YamlFileConfigurationBuilderTest extends TestCase
 {
-    public function setUp()
+    public function testBuilder()
     {
+
         if (!class_exists('Symfony\Component\Yaml\Yaml')) {
             $this->markTestSkipped('The Symfony2 YAML library is not available');
         }
-    }
 
-    public function testBuilder()
-    {
         $configurationBuilder = new YamlFileConfigurationBuilder(array(__DIR__.'/fixtures/yamlFileConfigurationBuilderTest-testBuilder.yml'));
 
         $configuration = $configurationBuilder->build();

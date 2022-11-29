@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+    push: ~
+    pull_request: ~
+
+jobs:
+
+    phpunit:
+        name: PHPUnit on ${{ matrix.php }} ${{ matrix.composer-flags }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php: ['7.4', '8.0', '8.1']
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                fetch-depth: 1
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: curl
+                  coverage: pcov
+
+            - name: Install Composer dependencies
+              uses: ramsey/composer-install@v2
+              with:
+                  composer-options: "--no-progress --prefer-dist --optimize-autoloader"
+
+            - name: Configure matchers
+              uses: mheap/phpunit-matcher-action@v1
+
+            - name: PHPUnit
+              run: ./vendor/bin/phpunit --coverage-text --teamcity

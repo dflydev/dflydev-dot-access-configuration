@@ -18,12 +18,13 @@
         }
     ],
     "require": {
-        "php": ">=5.3.2",
+        "php": ">=7.4",
         "dflydev/dot-access-data": "1.*",
         "dflydev/placeholder-resolver": "1.*"
     },
     "require-dev": {
-        "symfony/yaml": "~2.1"
+        "symfony/yaml": "^5.4 || ^6.0",
+        "phpunit/phpunit": "^9.3"
     },
     "suggest": {
         "symfony/yaml": "Required for using the YAML Configuration Builders"

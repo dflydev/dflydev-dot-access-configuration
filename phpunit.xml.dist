@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="tests/bootstrap.php">
-    <testsuites>
-        <testsuite name="Dot Access Configuration Test Suite">
-            <directory>./tests/Dflydev/DotAccessConfiguration</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>./src/Dflydev/DotAccessConfiguration/</directory>
-        </whitelist>
-    </filter>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" bootstrap="tests/bootstrap.php" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory>./src/Dflydev/DotAccessConfiguration/</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="Dot Access Configuration Test Suite">
+      <directory>./tests/Dflydev/DotAccessConfiguration</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>

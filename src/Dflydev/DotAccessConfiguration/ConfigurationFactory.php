@@ -18,6 +18,6 @@ class ConfigurationFactory implements ConfigurationFactoryInterface
      */
     public function create()
     {
-        return new Configuration;
+        return new Configuration();
     }
 }

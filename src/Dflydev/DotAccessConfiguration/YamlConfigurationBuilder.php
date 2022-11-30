@@ -39,13 +39,12 @@ class YamlConfigurationBuilder extends AbstractConfigurationBuilder
     public function internalBuild(ConfigurationInterface $configuration)
     {
         if (null !== $this->input) {
-            try{
+            try {
                 $yml = Yaml::parse($this->input, Yaml::PARSE_EXCEPTION_ON_INVALID_TYPE);
             } catch (\Exception $e) {
                 throw new InvalidArgumentException($e->getMessage(), 0, $e);
             }
-            if (is_string($yml))
-            {
+            if (is_string($yml)) {
                 throw(new \InvalidArgumentException('Yaml could not be parsed, parser detected a string.'));
             }
             $configuration->importRaw($yml);

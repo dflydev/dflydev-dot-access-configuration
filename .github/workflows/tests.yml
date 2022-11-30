@@ -6,33 +6,57 @@ on:
 
 jobs:
 
-    phpunit:
-        name: PHPUnit on ${{ matrix.php }} ${{ matrix.composer-flags }}
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                php: ['7.4', '8.0', '8.1']
+  phpunit:
+    name: PHPUnit on ${{ matrix.php }} ${{ matrix.composer-flags }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.4', '8.0', '8.1']
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-              with:
-                fetch-depth: 1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
 
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php }}
-                  extensions: curl
-                  coverage: pcov
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+            php-version: ${{ matrix.php }}
+            extensions: curl
+            coverage: pcov
 
-            - name: Install Composer dependencies
-              uses: ramsey/composer-install@v2
-              with:
-                  composer-options: "--no-progress --prefer-dist --optimize-autoloader"
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v2
+        with:
+            composer-options: "--no-progress --prefer-dist --optimize-autoloader"
 
-            - name: Configure matchers
-              uses: mheap/phpunit-matcher-action@v1
+      - name: Configure matchers
+        uses: mheap/phpunit-matcher-action@v1
 
-            - name: PHPUnit
-              run: ./vendor/bin/phpunit --coverage-text --teamcity
+      - name: PHPUnit
+        run: ./vendor/bin/phpunit --coverage-text --teamcity
+
+  phpcs:
+    name: phpcs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          tools: cs2pr
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          composer-options: "--no-progress --prefer-dist --optimize-autoloader"
+
+      - name: phpcs
+        run: ./vendor/bin/phpcs -q --report=checkstyle | cs2pr              

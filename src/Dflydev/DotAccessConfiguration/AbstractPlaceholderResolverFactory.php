@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/dot-access-configuration.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -25,10 +25,10 @@ abstract class AbstractPlaceholderResolverFactory implements PlaceholderResolver
 
     /**
      * Internal create
-     * 
+     *
      * @param ConfigurationInterface $configuration
      * @param DataSourceInterface $dataSource
-     * 
+     *
      * @return PlaceholderResolverInterface
      */
     abstract protected function createInternal(ConfigurationInterface $configuration, DataSourceInterface $dataSource);

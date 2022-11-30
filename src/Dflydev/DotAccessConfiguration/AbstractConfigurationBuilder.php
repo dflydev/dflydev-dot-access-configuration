@@ -38,7 +38,7 @@ abstract class AbstractConfigurationBuilder implements ConfigurationBuilderInter
     protected function configurationFactory()
     {
         if (null === $this->configurationFactory) {
-            $this->configurationFactory = new ConfigurationFactory;
+            $this->configurationFactory = new ConfigurationFactory();
         }
 
         return $this->configurationFactory;

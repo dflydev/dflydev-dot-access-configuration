@@ -11,7 +11,9 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ConfigurationTest extends TestCase
 {
     protected function getTestData()
     {
@@ -148,7 +150,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function testSetPlaceholderResolver()
     {
-        $placeholderResolver = $this->getMock('Dflydev\PlaceholderResolver\PlaceholderResolverInterface');
+        $placeholderResolver = $this->getMockBuilder(\Dflydev\PlaceholderResolver\PlaceholderResolverInterface::class)->getMock();
 
         $placeholderResolver
             ->expects($this->once())

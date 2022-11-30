@@ -11,12 +11,16 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
-class PlaceholderResolverFactoryTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class PlaceholderResolverFactoryTest extends TestCase
 {
     public function testCreate()
     {
-        $configuration = $this->getMock('Dflydev\DotAccessConfiguration\Configuration');
+        $configuration = $this->getMockBuilder(\Dflydev\DotAccessConfiguration\Configuration::class)->getMock();
         $placeholderResolverFactory = new PlaceholderResolverFactory;
         $placeholderResolver = $placeholderResolverFactory->create($configuration);
+
+        $this->assertNotNull($placeholderResolver);
     }
 }

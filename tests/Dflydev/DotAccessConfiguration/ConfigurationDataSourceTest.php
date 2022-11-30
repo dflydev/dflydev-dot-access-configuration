@@ -11,11 +11,13 @@
 
 namespace Dflydev\DotAccessConfiguration;
 
-class ConfigurationDataSourceTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ConfigurationDataSourceTest extends TestCase
 {
     public function test()
     {
-        $configuration = $this->getMock('Dflydev\DotAccessConfiguration\Configuration');
+        $configuration = $this->getMockBuilder(\Dflydev\DotAccessConfiguration\Configuration::class)->getMock();
 
         $configuration
             ->expects($this->any())

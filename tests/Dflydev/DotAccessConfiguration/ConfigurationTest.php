@@ -17,6 +17,15 @@ class ConfigurationTest extends TestCase
 {
     protected function getTestData()
     {
+
+        $configurationTestObjectClass = new class (null){
+            public $key;
+            public function __construct($key)
+            {
+                $this->key = $key;
+            }
+        };
+
         return array(
             'a' => array(
                 'b' => array(
@@ -26,12 +35,12 @@ class ConfigurationTest extends TestCase
             'abc' => '%a.b.c%',
             'abcd' => '%a.b.c.d%',
             'some' => array(
-                'object' => new ConfigurationTestObject('some.object'),
+                'object' => new $configurationTestObjectClass('some.object'),
                 'other' => array(
-                    'object' => new ConfigurationTestObject('some.other.object'),
+                    'object' => new $configurationTestObjectClass('some.other.object'),
                 ),
             ),
-            'object' => new ConfigurationTestObject('object'),
+            'object' => new $configurationTestObjectClass('object'),
             'an_array' => array('hello'),
         );
     }
@@ -164,14 +173,5 @@ class ConfigurationTest extends TestCase
         $configuration->setPlaceholderResolver($placeholderResolver);
 
         $this->assertEquals('bar', $configuration->resolve('foo'));
-    }
-}
-
-class ConfigurationTestObject
-{
-    public $key;
-    public function __construct($key)
-    {
-        $this->key = $key;
     }
 }

@@ -35,6 +35,11 @@
             "Dflydev\\DotAccessConfiguration": "src"
         }
     },
+    "scripts": {
+        "style:fix": "@php ./vendor/bin/phpcsf",
+        "style:check": "@php ./vendor/bin/phpcs",
+        "test" : "@php ./vendor/bin/phpunit"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"

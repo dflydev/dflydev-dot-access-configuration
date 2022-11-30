@@ -35,7 +35,7 @@ jobs:
         uses: mheap/phpunit-matcher-action@v1
 
       - name: PHPUnit
-        run: ./vendor/bin/phpunit --coverage-text --teamcity
+        run: composer run test -- --coverage-text --teamcity
 
   phpcs:
     name: phpcs
@@ -59,4 +59,4 @@ jobs:
           composer-options: "--no-progress --prefer-dist --optimize-autoloader"
 
       - name: phpcs
-        run: ./vendor/bin/phpcs -q --report=checkstyle | cs2pr              
+        run: composer run style:check -- -q --report=checkstyle | cs2pr              

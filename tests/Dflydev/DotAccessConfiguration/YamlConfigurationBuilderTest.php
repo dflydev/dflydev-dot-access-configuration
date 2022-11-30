@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/dot-access-configuration.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -21,11 +21,10 @@ class YamlConfigurationBuilderTest extends TestCase
             $this->markTestSkipped('The Symfony2 YAML library is not available');
         }
 
-        $configurationBuilder = new YamlConfigurationBuilder;
+        $configurationBuilder = new YamlConfigurationBuilder();
         $configuration = $configurationBuilder->build();
 
         $this->assertNotNull($configuration);
-
     }
 
     public function testBuildWithData()

@@ -166,7 +166,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
     protected function data()
     {
         if (null === $this->data) {
-            $this->data = new Data;
+            $this->data = new Data();
         }
 
         return $this->data;

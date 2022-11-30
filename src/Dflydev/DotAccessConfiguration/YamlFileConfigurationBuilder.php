@@ -49,7 +49,7 @@ class YamlFileConfigurationBuilder extends AbstractConfigurationBuilder
                             // Absolute path
                             $imports[] = $file;
                         } else {
-                            if ($realpath = realpath(dirname($yamlConfigurationFilename).'/'.$file)) {
+                            if ($realpath = realpath(dirname($yamlConfigurationFilename) . '/' . $file)) {
                                 $imports[] = $realpath;
                             }
                         }
@@ -75,7 +75,7 @@ class YamlFileConfigurationBuilder extends AbstractConfigurationBuilder
         $configuration->importRaw($config);
 
         if ($internalImports) {
-           foreach ((array) $internalImports as $import) {
+            foreach ((array) $internalImports as $import) {
                 $configuration->append('imports', $import);
             }
         }

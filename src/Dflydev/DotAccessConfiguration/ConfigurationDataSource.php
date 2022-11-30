@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/dot-access-configuration.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -19,7 +19,7 @@ class ConfigurationDataSource implements DataSourceInterface
 
     /**
      * Constructor
-     * 
+     *
      * @param ConfigurationInterface $configuration
      */
     public function __construct(ConfigurationInterface $configuration)
@@ -53,9 +53,9 @@ class ConfigurationDataSource implements DataSourceInterface
 
     /**
      * Set Configuration
-     * 
+     *
      * @param ConfigurationInterface $configuration
-     * 
+     *
      * @return ConfigurationDataSource
      */
     public function setConfiguration(ConfigurationInterface $configuration)

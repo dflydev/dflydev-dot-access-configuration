@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/dot-access-configuration.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -159,7 +159,7 @@ class ConfigurationTest extends TestCase
             ->will($this->returnValue('bar'))
         ;
 
-        $configuration = new Configuration;
+        $configuration = new Configuration();
 
         $configuration->setPlaceholderResolver($placeholderResolver);
 

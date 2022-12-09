@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": ">=7.4",
-        "dflydev/dot-access-data": "1.*",
+        "dflydev/dot-access-data": "^3",
         "dflydev/placeholder-resolver": "1.*"
     },
     "require-dev": {

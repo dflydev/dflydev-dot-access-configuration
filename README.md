@@ -10,8 +10,8 @@ to provide a complete configuration solution.
 ## Requirements
 
  * PHP (5.3+)
- * [dflydev/dot-access-data](https://github.com/dflydev/dflydev-dot-access-data) (1.*)
- * [dflydev/placeholder-resolver](https://github.com/dflydev/dflydev-placeholder-resolver) (1.*)
+ * [dflydev/dot-access-data](https://github.com/dflydev/dflydev-dot-access-data) (^3)
+ * [dflydev/placeholder-resolver](https://github.com/dflydev/dflydev-placeholder-resolver) (1.x)
  * [symfony/yaml](https://github.com/symfony/Yaml) (>2,<2.2) *(suggested)*
 
 ## Usage

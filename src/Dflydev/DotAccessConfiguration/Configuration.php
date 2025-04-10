@@ -18,7 +18,7 @@ class Configuration extends AbstractConfiguration
      *
      * @param array|null $config
      */
-    public function __construct(array $config = null)
+    public function __construct(?array $config = null)
     {
         $this->importRaw($config);
     }
